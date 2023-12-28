@@ -17,5 +17,12 @@ public class GreetingController {
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
+
+	@RequestMapping("/sayHelloWorldJava")
+	//@RequestParam is just like the [FromQuery] from .NET it is for query params and has a default value
+	public Greeting sayHelloWorldJava() {
+		var greeting = new Greeting(counter.incrementAndGet(), String.format( "Hello World! Java")); 
+		return greeting;
+	}
 	
 }
