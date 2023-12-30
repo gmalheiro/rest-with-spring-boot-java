@@ -17,4 +17,19 @@ public class SimpleMath {
         return multiplication;
     }
 
+    public Double division(Double numberOne,Double numberTwo){
+        Double division = numberOne / numberTwo;
+        return division;
+    }
+
+    public Double mean(Double numberOne, Double numberTwo){
+        Double mean = (numberOne + numberTwo) / 2 ;
+        return mean;
+    }
+
+    public Double squareRoot(Double numberOne){
+        Double squareRoot = Math.sqrt(numberOne) ;
+        return squareRoot;
+    }
+
 }
