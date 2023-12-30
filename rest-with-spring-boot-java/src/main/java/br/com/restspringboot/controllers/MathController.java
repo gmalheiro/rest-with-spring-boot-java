@@ -53,4 +53,46 @@ public class MathController {
 		return multiplication;
 	}
 
+	@RequestMapping(value = "/division/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double Division(@PathVariable(value = "numberOne") String numberOne, 
+						   @PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+
+
+			if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+				throw new UnsupportedMathOperationException("Please set a valid numeric value");
+			}
+
+		Double division = _math.division(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));		
+
+		return division;
+	}
+
+	@RequestMapping(value = "/mean/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double Mean(@PathVariable(value = "numberOne") String numberOne, 
+						   @PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+
+
+			if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
+				throw new UnsupportedMathOperationException("Please set a valid numeric value");
+			}
+
+		Double mean = _math.mean(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));		
+
+		return mean;
+	}
+
+@RequestMapping(value = "/squareRoot/{numberOne}", method=RequestMethod.GET)
+	public Double Teste(@PathVariable(value = "numberOne") String numberOne) throws Exception {
+
+
+			if (!NumberConverter.isNumeric(numberOne)) {
+				throw new UnsupportedMathOperationException("Please set a valid numeric value");
+			}
+
+		Double mean = _math.squareRoot(NumberConverter.convertToDouble(numberOne));		
+
+		return mean;
+	}
+
+
 }
