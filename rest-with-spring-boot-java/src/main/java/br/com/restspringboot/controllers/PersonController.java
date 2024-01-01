@@ -62,7 +62,21 @@ public class PersonController {
 		return person;
 	}
 	
-	
+		@RequestMapping(value = "/{id}", method=RequestMethod.DELETE,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public Person delete(@PathVariable(value = "id") String id) {
+		
+		var person = service.findById(id);
+		
+		if (person == null){
+			return new Person()	;
+		}
+
+		service.delete(id);
+		
+		return person;
+
+	}
 	
 
 }

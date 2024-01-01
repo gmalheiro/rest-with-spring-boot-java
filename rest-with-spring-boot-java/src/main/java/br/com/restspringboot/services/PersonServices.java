@@ -65,6 +65,9 @@ public class PersonServices {
 	public void delete(String id) {
 		
 		logger.info("Deleting one person!");
+
+		this.persons.remove(Integer.parseInt(id) -1);
+
 	}
 	
 	private Person mockPerson(int i) {
