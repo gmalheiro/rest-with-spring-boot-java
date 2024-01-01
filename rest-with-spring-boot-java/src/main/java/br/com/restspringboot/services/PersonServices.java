@@ -33,7 +33,7 @@ public class PersonServices {
 		logger.info("Finding one person!");
 		
 		Person person = new Person();
-		person.setId(counter.incrementAndGet());
+		person.setId(Long.parseLong(id));
 		person.setFirstName("Gabriel");
 		person.setLastName("Malheiro");
 		person.setAddress("São Paulo - São Paulo - Brasil");
