@@ -1,24 +1,30 @@
 package br.com.restspringboot.controllers;
 
-import org.springframework.web.bind.annotation.PathVariable;
+import java.util.List;
+
+import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.restspringboot.models.Person;
+import br.com.restspringboot.services.PersonServices;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
 @RestController
+@RequestMapping("/person")
 public class PersonController {
 
-	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
-	public Double sum(
-			@PathVariable(value = "numberOne") String numberOne,
-			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+	@Autowired
+	private PersonServices service;
 
-		if (!NumberConverter.isNumeric(numberOne) || !NumberConverter.isNumeric(numberTwo)) {
-			throw new UnsupportedMathOperationException("Please set a valid numeric value");
-		}
-
-		var sum = _math.sum(NumberConverter.convertToDouble(numberOne), NumberConverter.convertToDouble(numberTwo));
-		return sum;
+	@RequestMapping(method=RequestMethod.GET,
+					produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Person> findAll() {
+		return service.findAll();
 	}
+	
+
 
 }
