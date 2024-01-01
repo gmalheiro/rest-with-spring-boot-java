@@ -50,6 +50,17 @@ public class PersonController {
 
 		return person;
 	}
+
+	@RequestMapping(value = "{id}",method=RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Person updatePerson(@RequestBody Person person, @PathVariable(value = "id") String id) {
+		service.update(person,id);
+		
+		if (person == null){
+			return new Person();
+		}	
+
+		return person;
+	}
 	
 	
 	
