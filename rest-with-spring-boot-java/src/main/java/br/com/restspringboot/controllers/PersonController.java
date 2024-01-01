@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.restspringboot.models.Person;
 import br.com.restspringboot.services.PersonServices;
-import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
 @RequestMapping("/person")
@@ -25,6 +26,18 @@ public class PersonController {
 		return service.findAll();
 	}
 	
+	@RequestMapping(value = "/{id}", method=RequestMethod.GET)
+	public Person findById(@PathVariable(value = "id") String id) {
+		Person person = service.findById(id);
+		
+		if (person == null){
+			return new Person();
+		}
 
+		return person;
+
+	}
+	
+	
 
 }
