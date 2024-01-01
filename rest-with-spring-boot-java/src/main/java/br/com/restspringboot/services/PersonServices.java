@@ -54,10 +54,11 @@ public class PersonServices {
 		return person;
 	}
 	
-	public Person update(Person person) {
-		
+	public Person update(Person person,String id) {
 		logger.info("Updating one person!");
 		
+		this.persons.set(Integer.parseInt(id), person);
+
 		return person;
 	}
 	
