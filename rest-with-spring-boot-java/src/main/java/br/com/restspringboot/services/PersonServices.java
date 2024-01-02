@@ -16,48 +16,58 @@ public class PersonServices {
 	
 	private Logger logger = Logger.getLogger(PersonServices.class.getName());
 
+	private List<Person> persons = new ArrayList<Person>();
+
 	public List<Person> findAll() {
 
 		logger.info("Finding all people!");
 		
-		List<Person> persons = new ArrayList<>();
 		for (int i = 0; i < 8; i++) {
 			Person person = mockPerson(i);
-			persons.add(person);
+			this.persons.add(person);
 		}
-		return persons;
+		return this.persons;
 	}
 
 	public Person findById(String id) {
 		
 		logger.info("Finding one person!");
-		
-		Person person = new Person();
-		person.setId(counter.incrementAndGet());
-		person.setFirstName("Gabriel");
-		person.setLastName("Malheiro");
-		person.setAddress("São Paulo - São Paulo - Brasil");
-		person.setGender("Male");
+	
+		int index = (int) Long.parseLong(id) - 1;
+		Person person = this.persons.get(index);
+
+		if (person == null){
+			return new Person();
+		}
 		return person;
 	}
 	
 	public Person create(Person person) {
+
+		person.setId(counter.incrementAndGet());
+		
+		this.persons.add(person);
+
 
 		logger.info("Creating one person!");
 		
 		return person;
 	}
 	
-	public Person update(Person person) {
-		
+	public Person update(Person person,String id) {
 		logger.info("Updating one person!");
 		
+		this.persons.set(Integer.parseInt(id), person);
+
 		return person;
 	}
 	
 	public void delete(String id) {
 		
 		logger.info("Deleting one person!");
+
+		this.persons.remove(Integer.parseInt(id) -1);
+
 	}
 	
 	private Person mockPerson(int i) {
