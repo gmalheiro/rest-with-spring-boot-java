@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import br.com.restspringboot.models.Person;
 import br.com.restspringboot.repositories.PersonRepository;
+import br.com.restspringboot.Data.VO.V1.PersonVO;
+import br.com.restspringboot.Mapper.DozerMapper;
 import br.com.restspringboot.exceptions.ResourceNotFoundException;
 
 @Service
@@ -17,11 +19,13 @@ public class PersonServices {
 	@Autowired
 	PersonRepository repository;
 
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 
 		logger.info("Finding all people!");
 
-		return repository.findAll();
+		var people = repository.findAll();
+
+		return DozerMapper.parseListObjects(people, PersonVO.class);
 	}
 
 	public Person findById(Long id) {

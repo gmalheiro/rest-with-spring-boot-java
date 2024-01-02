@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.restspringboot.Data.VO.V1.PersonVO;
 import br.com.restspringboot.models.Person;
 import br.com.restspringboot.services.PersonServices;
 
@@ -26,7 +27,7 @@ public class PersonController {
 	private PersonServices service;
 	
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Person> findAll() {
+	public List<PersonVO> findAll() {
 		return service.findAll();
 	}
 	
