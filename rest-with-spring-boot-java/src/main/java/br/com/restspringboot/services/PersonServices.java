@@ -28,12 +28,14 @@ public class PersonServices {
 		return DozerMapper.parseListObjects(people, PersonVO.class);
 	}
 
-	public Person findById(Long id) {
+	public PersonVO findById(Long id) {
 		
 		logger.info("Finding one person!");
 		
-		return repository.findById(id)
+		var entity = repository.findById(id)
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
+
+		return DozerMapper.parseObject(entity, PersonVO.class);
 	}
 	
 	public Person create(Person person) {
