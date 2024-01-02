@@ -1,5 +1,4 @@
 package br.com.restspringboot.services;
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -13,47 +12,44 @@ import br.com.restspringboot.exceptions.ResourceNotFoundException;
 @Service
 public class PersonServices {
 	
-	@Autowired PersonRepository repository;
-
 	private Logger logger = Logger.getLogger(PersonServices.class.getName());
+	
+	@Autowired
+	PersonRepository repository;
 
 	public List<Person> findAll() {
 
 		logger.info("Finding all people!");
-		
-		var people = repository.findAll();
 
-		return people;
+		return repository.findAll();
 	}
 
 	public Person findById(Long id) {
 		
 		logger.info("Finding one person!");
-
-		var person =  repository.findById(id)
-		.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-	
-		return person;
+		
+		return repository.findById(id)
+			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 	}
 	
 	public Person create(Person person) {
+
 		logger.info("Creating one person!");
 		
-		repository.save(person);
-
-		return person;
+		return repository.save(person);
 	}
 	
-	public Person update(Person person,String id) {
+	public Person update(Person person) {
+		
 		logger.info("Updating one person!");
 		
-		var personInDb = repository.findById(person.getId())
+		var entity = repository.findById(person.getId())
 			.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 
-		personInDb.setFirstName(person.getFirstName());
-		personInDb.setLastName(person.getLastName());
-		personInDb.setAddress(person.getAddress());
-		personInDb.setGender(person.getGender());
+		entity.setFirstName(person.getFirstName());
+		entity.setLastName(person.getLastName());
+		entity.setAddress(person.getAddress());
+		entity.setGender(person.getGender());
 		
 		return repository.save(person);
 	}
@@ -64,7 +60,6 @@ public class PersonServices {
 		
 		var entity = repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
-
 		repository.delete(entity);
-	} 
+	}
 }
