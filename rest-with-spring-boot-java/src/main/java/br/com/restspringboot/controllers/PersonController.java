@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.restspringboot.Data.VO.V1.PersonVO;
-import br.com.restspringboot.models.Person;
 import br.com.restspringboot.services.PersonServices;
 
 
@@ -45,7 +44,7 @@ public class PersonController {
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
 			produces = MediaType.APPLICATION_JSON_VALUE)
-	public Person update(@RequestBody Person person) {
+	public PersonVO update(@RequestBody PersonVO person) {
 		return service.update(person);
 	}
 	
