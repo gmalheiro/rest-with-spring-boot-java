@@ -38,11 +38,12 @@ public class PersonServices {
 		return DozerMapper.parseObject(entity, PersonVO.class);
 	}
 	
-	public Person create(Person person) {
+	public PersonVO create(PersonVO person) {
 
 		logger.info("Creating one person!");
-		
-		return repository.save(person);
+		var entity = DozerMapper.parseObject(person, Person.class);
+		var vo = DozerMapper.parseObject(repository.save(entity),PersonVO.class );
+		return vo;
 	}
 	
 	public Person update(Person person) {
