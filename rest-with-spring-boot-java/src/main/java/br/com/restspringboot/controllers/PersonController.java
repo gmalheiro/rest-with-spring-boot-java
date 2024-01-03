@@ -19,7 +19,7 @@ import br.com.restspringboot.services.PersonServices;
 
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/person/api/v1")
 public class PersonController {
 	
 	@Autowired
