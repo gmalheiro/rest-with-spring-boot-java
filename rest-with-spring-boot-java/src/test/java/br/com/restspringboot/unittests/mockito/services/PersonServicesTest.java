@@ -91,18 +91,21 @@ class PersonServicesTest {
 
 	@Test
 	void testFindById() {
-		Person entity = input.mockEntity(1);
+		Person entity = input.mockEntity();
 		entity.setId(1L);
 
 		when(repository.findById(1L)).thenReturn(Optional.of(entity));
 
-		var result = service.findById(1L);
+		var result = service.findById(1l);
 		assertNotNull(result);
 		assertNotNull(result.getKey());
 		assertNotNull(result.getLinks());
-
+		
+		//Aqui ele aparentemente só confere se o resultado é true
+		//Ele apenas testa para ver se a tal condição é true
 		assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
-		assertEquals("Addres Test1", result.getAddress());
+		//Aqui aparentemente ele faz a comparação entre dois params
+		assertEquals("Address Test1", result.getAddress());
 		assertEquals("First Name Test1", result.getFirstName());
 		assertEquals("Last Name Test1", result.getLastName());
 		assertEquals("Female", result.getGender());
