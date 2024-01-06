@@ -43,33 +43,33 @@ class PersonServicesTest {
 	}
 
 	@Test
-void testFindAll() {
-    List<Person> list = input.mockEntityList();
+	void testFindAll() {
+		List<Person> list = input.mockEntityList();
 
-    when(repository.findAll()).thenReturn(list);
+		when(repository.findAll()).thenReturn(list);
 
-    var people = service.findAll();
-    assertNotNull(people);
-    assertEquals(14, people.size());
+		var people = service.findAll();
+		assertNotNull(people);
+		assertEquals(14, people.size());
 
-    for (int i = 0; i < people.size(); i++) {
-        var person = people.get(i);
+		for (int i = 0; i < people.size(); i++) {
+			var person = people.get(i);
 
-        assertNotNull(person);
-        assertNotNull(person.getKey());
-        assertNotNull(person.getLinks());
+			assertNotNull(person);
+			assertNotNull(person.getKey());
+			assertNotNull(person.getLinks());
 
-        String expectedLink = String.format("</api/person/v1/%d>;rel=\"self\"", i);
-        assertTrue(person.toString().contains("links: [" + expectedLink + "]"));
+			String expectedLink = String.format("</api/person/v1/%d>;rel=\"self\"", i);
+			assertTrue(person.toString().contains("links: [" + expectedLink + "]"));
 
-        assertEquals("Addres Test" + (i), person.getAddress());
-        assertEquals("First Name Test" + (i), person.getFirstName());
-        assertEquals("Last Name Test" + (i), person.getLastName());
+			assertEquals("Addres Test" + (i), person.getAddress());
+			assertEquals("First Name Test" + (i), person.getFirstName());
+			assertEquals("Last Name Test" + (i), person.getLastName());
 
-        String expectedGender = people.get(i).getGender();
-        assertEquals(expectedGender, person.getGender());
-    }
-}
+			String expectedGender = people.get(i).getGender();
+			assertEquals(expectedGender, person.getGender());
+		}
+	}
 
 	@Test
 	void testFindById() {
@@ -115,24 +115,23 @@ void testFindAll() {
 
 	@Test
 	void testUpdate() {
-		Person entity = input.mockEntity(1); 
-		
+		Person entity = input.mockEntity(1);
+
 		Person persisted = entity;
 		persisted.setId(1L);
-		
+
 		PersonVO vo = input.mockVO(1);
 		vo.setKey(1L);
-		
 
 		when(repository.findById(1L)).thenReturn(Optional.of(entity));
 		when(repository.save(entity)).thenReturn(persisted);
-		
+
 		var result = service.update(vo);
-		
+
 		assertNotNull(result);
 		assertNotNull(result.getKey());
 		assertNotNull(result.getLinks());
-		
+
 		assertTrue(result.toString().contains("links: [</api/person/v1/1>;rel=\"self\"]"));
 		assertEquals("Addres Test1", result.getAddress());
 		assertEquals("First Name Test1", result.getFirstName());
@@ -146,7 +145,7 @@ void testFindAll() {
 			service.update(null);
 		});
 
-		String expectedMessage =  "It is not allowed to persist a null object!";
+		String expectedMessage = "It is not allowed to persist a null object!";
 		String actualMessage = exception.getMessage();
 
 		assertTrue(actualMessage.contains(expectedMessage));
@@ -158,7 +157,7 @@ void testFindAll() {
 			service.create(null);
 		});
 
-		String expectedMessage =  "It is not allowed to persist a null object!";
+		String expectedMessage = "It is not allowed to persist a null object!";
 		String actualMessage = exception.getMessage();
 
 		assertTrue(actualMessage.contains(expectedMessage));
@@ -166,11 +165,11 @@ void testFindAll() {
 
 	@Test
 	void testDelete() {
-		Person entity = input.mockEntity(1); 
+		Person entity = input.mockEntity(1);
 		entity.setId(1L);
-		
+
 		when(repository.findById(1L)).thenReturn(Optional.of(entity));
-		
+
 		service.delete(1L);
 	}
 
