@@ -51,9 +51,9 @@ public class MockBook {
         BookVO book = new BookVO();
         book.setAuthor("Author Test" + number);
         book.setTitle("Title Test" + number);
-        book.setPrice(Math.random() * (10.0 - 1.0) + 1.0);
+        book.setPrice(7.0);
         book.setKey(number.longValue());
-        book.setLaunchDate(getRandomDate());
+        book.setLaunchDate(parseDateString("2017-11-29T02:00:00.000+00:00"));
         return book;
     }   
 
