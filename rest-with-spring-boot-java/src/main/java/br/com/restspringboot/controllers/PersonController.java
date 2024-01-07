@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-//@CrossOrigin : For global access
+//@CrossOrigin : For global access in this controller
 @RestController
 @RequestMapping("/api/person/v1")
 @Tag(name ="People", description ="Endpoint for managing people")
