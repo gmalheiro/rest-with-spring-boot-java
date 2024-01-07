@@ -33,7 +33,6 @@ public class PersonController {
 	@Autowired
 	private PersonServices service;
 	
-	@CrossOrigin(origins = {"http://localhost:8080","https://restspringboot.com"})
 	@GetMapping(produces = { MediaType.APPLICATION_JSON,
 		MediaType.APPLICATION_XML,
 		MediaType.APPLICATION_YML 
@@ -58,7 +57,6 @@ public class PersonController {
 		return service.findAll();
 	}
 	
-	@CrossOrigin(origins = "http://localhost:8080")
 	@GetMapping(value = "/{id}",
 			produces = MediaType.APPLICATION_JSON)
 			@Operation(summary = "Finds a Person", description = "Finds a Person",
