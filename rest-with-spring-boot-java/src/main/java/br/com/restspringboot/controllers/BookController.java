@@ -36,7 +36,7 @@ public class BookController {
 		MediaType.APPLICATION_YML 
 		})
 		@Operation(summary = "Finds all Books", description = "Finds all Books",
-		tags = {"Books"},
+		tags = {"Book"},
 		responses = {
 			@ApiResponse(description = "Success", responseCode = "200",
 				content = {
